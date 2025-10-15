@@ -1,0 +1,33 @@
+//WAP to enter numbers till the user wants. At the end, it should display the count of positive, negative, and Zeroes entered.
+
+//Answer -
+
+//Program:
+
+
+#include <stdio.h>
+
+int main() و{
+
+int num, pos = 0, neg = 0, zero = 0;
+
+int count = 5; // You can change this to any number of inputs
+
+for (int i = 1; i <= count; i++) {
+
+printf("Enter number %d: ", i);
+
+scanf("%d", &num);
+
+if (num > 0)
+pos++;
+else if (num < 0)
+neg++;
+else
+zero++;
+}
+
+printf("\nPositive: %d\nNegative: %d\nZero: %d\n", pos, neg, zero);
+
+return 0;
+}

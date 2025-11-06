@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+// Recursive function to find factorial
+long long fact_recursive(int n) {
+    if (n == 0)
+        return 1;
+    else
+        return n * fact_recursive(n - 1);
+}
+
+// Non-recursive function to find factorial
+long long fact_nonrecursive(int n) {
+    long long f = 1;
+    for (int i = 1; i <= n; i++)
+        f *= i;
+    return f;
+}
+
+// Function to compute Binomial Coefficient (nCr)
+long long binomial(int n, int r, int useRecursive) {
+    if (r > n) return 0;
+    if (useRecursive)
+        return fact_recursive(n) / (fact_recursive(r) * fact_recursive(n - r));
+    else
+        return fact_nonrecursive(n) / (fact_nonrecursive(r) * fact_nonrecursive(n - r));
+}
+
+int main() {
+    int n, r, choice;
+    printf("Enter value of n: ");
+    scanf("%d", &n);
+    printf("Enter value of r: ");
+    scanf("%d", &r);
+
+    printf("\nChoose method:\n1. Recursive\n2. Non-Recursive\nEnter your choice: ");
+    scanf("%d", &choice);
+
+    if (choice == 1)
+        printf("\nUsing Recursive Function:\n");
+    else
+        printf("\nUsing Non-Recursive Function:\n");
+
+    if (r > n)
+        printf("Invalid! r cannot be greater than n.\n");
+    else {
+        long long result = binomial(n, r, choice == 1);
+        printf("\nBinomial Coefficient C(%d, %d) = %lld\n", n, r, result);
+    }
+
+    printf("\nTable of Binomial Coefficients (nCr):\n");
+    printf("--------------------------------------\n");
+    printf(" n\t r\t nCr\n");
+    printf("--------------------------------------\n");
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= i; j++) {
+            long long value = binomial(i, j, choice == 1);
+            printf(" %d\t %d\t %lld\n", i, j, value);
+        }
+    }
+
+    return 0;
+}

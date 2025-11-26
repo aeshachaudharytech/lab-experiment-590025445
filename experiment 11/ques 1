@@ -1,0 +1,28 @@
+//11.1 Write a program to apply bitwise OR, AND and NOT operators on bit level
+#include <stdio.h>
+
+int main() {
+    int a, b;
+
+    printf("Enter first number: ");
+    scanf("%d", &a);
+
+    printf("Enter second number: ");
+    scanf("%d", &b);
+
+    int ANDoperator = a & b;
+    int ORoperator = a || b;
+    int NOTA = !a;
+    int NOTB = !b;
+
+    printf("Bitwise AND = %d\n", ANDoperator);
+    printf("Bitwise OR   = %d\n", ORoperator);
+    printf("Bitwise NOT  = %d\n", NOTA);
+    printf("Bitwise NOT  = %d\n", NOTB);
+
+    return 0;
+}
+
+
+
+

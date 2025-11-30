@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+
+void insertInMiddle(struct Node** head, int value, int position) {
+    struct Node* newNode = createNode(value);
+
+    // If inserting at start
+    if (position == 1) {
+        newNode->next = *head;
+        *head = newNode;
+        return;
+    }
+
+    struct Node* temp = *head;
+    int i;
+    
+    for (i = 1; i < position - 1 && temp != NULL; i++) {
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Position out of range!\n");
+        return;
+    }
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    // Creating a simple list: 10 -> 20 -> 30
+    head = createNode(10);
+    head->next = createNode(20);
+    head->next->next = createNode(30);
+
+    printf("Original List:\n");
+    display(head);
+
+    int value, pos;
+    printf("\nEnter value to insert: ");
+    scanf("%d", &value);
+    printf("Enter position to insert: ");
+    scanf("%d", &pos);
+
+    insertInMiddle(&head, value, pos);
+
+    printf("\nUpdated List:\n");
+    display(head);
+
+    return 0;
+}
